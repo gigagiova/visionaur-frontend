@@ -1,0 +1,45 @@
+.overlay {
+    background: rgba( 0, 0, 0, 0.25 );
+    position: fixed;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.popup-background {
+    margin: 0 auto;
+    border-radius: 32px;
+    box-sizing: border-box;
+    background: rgba( 255, 255, 255, 0.8 );
+    border: 1px solid rgba(0,0,0,0.3);
+    backdrop-filter: blur(10px);
+    width: 100%;
+}
+
+.popup-title {
+    text-align: center;
+    padding-top: 5vh;
+    margin: 0;
+    font-size: 4vh;
+}
+
+@media (min-width: 670px) {
+    .popup-background {
+        width: 60%;
+    }
+}
+
+@media (min-width: 990px) {
+
+    .popup-title {
+      font-size: 5vh;
+    }
+
+    .popup-background {
+        width: 40%;
+    }
+}

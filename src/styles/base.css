@@ -1,0 +1,83 @@
+:root {
+    --theme-color: rgb(138,43,226);
+  }
+
+body {
+    margin: 0;
+}
+
+h1, h2, p, button, div {
+    font-family: 'Montserrat', sans-serif;
+    color: rgba(0, 0, 0, 0.8);
+}
+
+form {
+    margin: 2% auto;
+    text-align: center;
+    align-items: center;
+}
+
+input {
+    margin: 2%;
+    padding: 3% 5%;
+    border-radius: 16px;
+    background-color: rgba(255,255,255,0);
+    border: 2px solid rgba(0,0,0,0.2);
+    color: black;
+    box-sizing: border-box;
+    width: 90%;
+}
+
+input:focus {
+    outline: none;
+    border: 2px solid rgba(0,0,0,0.1);
+}
+
+.input-valid {
+    border: 2px solid rgba(51, 179, 0, 0.4) !important;
+  }
+
+button {
+    display: inline-block;
+    padding: 3% 5%;
+    margin: 3% 0;
+    text-decoration: none;
+    border-radius: 16px;
+    background-color: var(--theme-color);
+    border: none;
+    backdrop-filter: blur(10px);
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+ 
+button:hover {
+    background-color: white;
+    color: var(--theme-color);
+    box-shadow: 0 0 6px 0 var(--theme-color);
+}
+
+button:disabled {
+    cursor: not-allowed;
+}
+
+.link-text {
+    margin: 0;
+    text-align: center;
+    font-size: 2vh;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.error-text {
+    margin: 0;
+    font-size: medium;
+    color: lightcoral;
+    text-align: center;
+}
+
+@media (min-width: 990px) {
+    .small-text {
+        font-size: 2.5vh;
+    }
+}
