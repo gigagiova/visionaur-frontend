@@ -1,4 +1,5 @@
 import '../styles/landing.css'
+import NavBar from '../components/NavBar'
 import { popupActions } from '../store/redux'
 import { useDispatch } from 'react-redux'
 
@@ -8,6 +9,7 @@ const Landing = () => {
 
     return (
         <div>
+            <NavBar title="VISIONAUR"/>
             <div className="left-text">
                 <h1 className="slogan">Dare, Connect, Innovate</h1>
                 <h2 className="pitch">

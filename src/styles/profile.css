@@ -1,0 +1,38 @@
+
+
+.profile-picture {
+    width: 40%;
+    margin: 0 30%;
+    border-radius: 100%;
+}
+
+.profile-input {
+    border: none;
+    text-align: center;
+    font-size: large;
+    width: 50%;
+    padding: 2%;
+    border-radius: 0;
+    border-bottom: 2px solid rgba(0,0,0,0.2);
+}
+
+.profile-input:focus {
+    outline: none;
+    border: none;
+    border-bottom: 2px solid rgba(0,0,0,0.1);
+}
+
+
+@media (min-width: 670px) {
+    .profile-picture {
+        width: 30%;
+        margin: 0 35%;
+    }
+}
+
+@media (min-width: 990px) {
+    .profile-picture {
+        width: 30%;
+        margin: 0 35%;
+    }
+}

@@ -61,6 +61,20 @@ button:disabled {
     cursor: not-allowed;
 }
 
+textarea {
+    width: 90%;
+    height: 6em;
+    font-size: large;
+    max-width: 90%;
+    margin: 2% auto;
+    padding: 2%;
+}
+
+textarea:focus {
+    border-color: darkgray;
+    outline: none;
+}
+
 .link-text {
     margin: 0;
     text-align: center;
@@ -76,8 +90,28 @@ button:disabled {
     text-align: center;
 }
 
+.input-file {
+    text-align: center;
+    cursor: pointer;
+    margin: 2%;
+    border-radius: 16px;
+    display: inline-block;
+    text-decoration: underline;
+    color: darkgray;
+}
+
+.input-file:hover {
+    color: black;
+}
+
 @media (min-width: 990px) {
     .small-text {
         font-size: 2.5vh;
     }
+
+    .input-file {
+        padding: 1% 5%;
+    }
+
+
 }
