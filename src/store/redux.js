@@ -16,6 +16,7 @@ const popupSlice = createSlice({
 })
 
 
+// FIX THIS
 // retrive saved data from local storage
 const first_name = localStorage.getItem('first_name')
 const last_name = localStorage.getItem('last_name')

@@ -4,7 +4,7 @@ import { popupActions } from './store/redux'
 import './styles/base.css'
 import { useDispatch } from 'react-redux'
 import { Route, Switch } from 'react-router-dom'
-import Onboarding from './pages/Onboarding'
+import ProfileSetup from './pages/ProfileSetup'
 
 const App = () => {
   
@@ -14,7 +14,7 @@ const App = () => {
     <>
       <Switch>
         <Route path="/" exact><Landing/></Route>
-        <Route path="/onboarding"><Onboarding/></Route>
+        <Route path="/profile-setup"><ProfileSetup/></Route>
       </Switch>
       
       <Popup close={() => dispatch(popupActions.changePopup(null))}/>

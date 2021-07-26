@@ -65,7 +65,7 @@ textarea {
     width: 90%;
     height: 6em;
     font-size: large;
-    max-width: 90%;
+    resize: vertical;
     margin: 2% auto;
     padding: 2%;
 }
