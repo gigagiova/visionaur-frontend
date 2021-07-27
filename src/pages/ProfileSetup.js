@@ -16,12 +16,15 @@ const ProfileSetup = () => {
     const user = useSelector(state => state.user)
     const [blob, setBlob] = useState(null)
 
+    axiosInstance.get('user/account/')
+    .then(res => console.log(res))
+
     const updateProfile = e => {
         e.preventDefault()
         let form = new FormData()
         form.append('username', username)
         form.append('bio', bio)
-        form.append('image', blob)
+        form.append('profile_pic', blob, `${username}_propic.png`)
         console.log(form)
 
         axiosInstance.put('/user/account/', form, {headers: {'Content-Type': 'multipart/form-data',}})

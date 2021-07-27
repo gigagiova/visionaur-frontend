@@ -25,6 +25,7 @@ axiosInstance.interceptors.response.use(
     response => response,
     error => {
         const originalRequest = error.config;
+        // DO SOME MORE RESERCH
 
         // Prevent infinite loops
         if (error.response.status === 401 && originalRequest.url === axiosInstance.baseURL + 'token/refresh/') {
@@ -50,7 +51,6 @@ axiosInstance.interceptors.response.use(
                         .post('/token/refresh/', {refresh: refreshToken})
                         .then((response) => {
                             
-                            console.log(response)
                             localStorage.setItem('access_token', response.data.access)
             
                             axiosInstance.defaults.headers['Authorization'] = "JWT " + response.data.access
@@ -61,7 +61,7 @@ axiosInstance.interceptors.response.use(
                         })
                         .catch(err => {
                             console.log(err)
-                        });
+                        })
                     }else{
                         console.log("Refresh token is expired", decodedToken.exp, now)
                         window.location.href = '/login/'
