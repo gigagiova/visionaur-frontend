@@ -1,13 +1,9 @@
 import { createSlice, configureStore } from '@reduxjs/toolkit'
 
 
-const initialPopupState = {
-    popupContent: null
-}
-
 const popupSlice = createSlice({
     name: 'popup',
-    initialState: initialPopupState,
+    initialState: { popupContent: null },
     reducers: {
         changePopup(state, action) {
             state.popupContent = action.payload
@@ -15,31 +11,51 @@ const popupSlice = createSlice({
     }
 })
 
-
 // FIX THIS
 // retrive saved data from local storage
-const first_name = localStorage.getItem('first_name')
-const last_name = localStorage.getItem('last_name')
+const access_token = localStorage.getItem('access_token')
+const refresh_token = localStorage.getItem('refresh_token')
 
 let initialUserState = null
 // if we find them
-if (first_name && last_name) {
+if (access_token && refresh_token) {
     initialUserState = {
-        first_name: first_name,
-        last_name: last_name
+        access_token: access_token,
+        refresh_token: refresh_token
     }
 }
 
 const userSlice = createSlice({
     name: 'user',
-    initialState: initialUserState,
+    initialState: {user: initialUserState},
     reducers: {
         login(state, action) {
-            state.first_name = action.payload.first_name
-            state.last_name = action.payload.last_name
+            state.user = {
+                first_name: action.payload.first_name,
+                last_name: action.payload.last_name,
+                username: action.payload.username,
+                email: action.payload.email,
+                bio: action.payload.bio,
+                profile_pic: action.payload.profile_pic
+            }  
+
+            if (action.payload.access) localStorage.setItem('access_token', action.payload.access)
+            if (action.payload.refresh) localStorage.setItem('refresh_token', action.payload.refresh)
+        },
+        update(state, action) {
+            state.user = {
+                first_name: action.payload.first_name,
+                last_name: action.payload.last_name,
+                username: action.payload.username,
+                email: action.payload.email,
+                bio: action.payload.bio,
+                profile_pic: action.payload.profile_pic
+            }  
         },
         logout(state) {
-            state = null
+            state.user = null
+            localStorage.removeItem('access_token')
+            localStorage.removeItem('refresh_token')
         }
     }
 })

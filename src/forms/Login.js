@@ -2,8 +2,9 @@ import { useState } from 'react'
 import axiosInstance from '../API/axios'
 import errorDict from '../API/errorDict'
 import { emailRE } from './inputChecks'
-import { popupActions } from '../store/redux'
+import { popupActions, userActions } from '../store/redux'
 import { useDispatch } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 
 const Login = () => {
 
@@ -15,6 +16,7 @@ const Login = () => {
     const [error, setError] = useState(null)
 
     const dispatch = useDispatch()
+    const history = useHistory()
 
     const handleEmailChange = event => {
         setEmail(event.target.value)
@@ -38,18 +40,20 @@ const Login = () => {
 
     const handleSubmit = event => {
         event.preventDefault()
-        axiosInstance.post('/token/obtain/', {
+        axiosInstance.post('/user/login/', {
             "email": email,
             "password": password
         })
         .then(response => {
+            console.log(response)
             if (response.data.error){
                 setError(errorDict[response.data.error])
                 setTimeout(() => setError(null), 3000)
             } else {
                 axiosInstance.defaults.headers['Authorization'] = "JWT " + response.data.access
-                localStorage.setItem('access_token', response.data.access)
-                localStorage.setItem('refresh_token', response.data.refresh)
+                dispatch(userActions.login(response.data))
+                dispatch(popupActions.changePopup(null))
+                history.push("/profile")
             }
         })
         .catch(error => console.log(error))

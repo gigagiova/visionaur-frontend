@@ -1,7 +1,9 @@
 import { useState, useRef, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import reactDom from "react-dom"
 import ReactCrop from 'react-image-crop'
 import blank from '../assets/blank.png'
+import { mediaBaseURL } from '../API/utils'
 
 const ChangePropic = props => {
     
@@ -13,6 +15,15 @@ const ChangePropic = props => {
 
     const previewCanvasRef = useRef(null)
     const imgRef = useRef(null)
+    const user = useSelector(state => state.user.user)
+
+    const [defaultImage, setDefaultImage] = useState(blank)
+
+    useEffect(() => {
+        if (user?.profile_pic) {
+            setDefaultImage(mediaBaseURL + user.profile_pic)
+        }
+    }, [user])
 
     useEffect(() => {
         if (!completedCrop || !previewCanvasRef.current || !imgRef.current) {
@@ -93,7 +104,7 @@ const ChangePropic = props => {
                 className="profile-picture"
                 />
             ) : (
-                <img alt='profile' className="profile-picture" src={blank}/>
+                <img alt='profile' className="profile-picture" src={defaultImage}/>
             )}
             <label className="input-file">
                 Change profile image

@@ -27,9 +27,15 @@ axiosInstance.interceptors.response.use(
         const originalRequest = error.config;
         // DO SOME MORE RESERCH
 
+        if (!error.response) {
+            console.log(error)
+            // for some reasone we have no response, ie network error
+            return Promise.reject(error)
+        }
+
         // Prevent infinite loops
         if (error.response.status === 401 && originalRequest.url === axiosInstance.baseURL + 'token/refresh/') {
-            window.location.href = '/login/'
+            window.location.href = '/force-logout/'
             return Promise.reject(error)
         }
 
@@ -52,6 +58,7 @@ axiosInstance.interceptors.response.use(
                         .then((response) => {
                             
                             localStorage.setItem('access_token', response.data.access)
+                            localStorage.setItem('refresh_token', response.data.refresh)
             
                             axiosInstance.defaults.headers['Authorization'] = "JWT " + response.data.access
                             originalRequest.headers['Authorization'] = "JWT " + response.data.access
@@ -64,11 +71,11 @@ axiosInstance.interceptors.response.use(
                         })
                     }else{
                         console.log("Refresh token is expired", decodedToken.exp, now)
-                        window.location.href = '/login/'
+                        window.location.href = '/force-logout/'
                     }
                 }else{
                     console.log("Refresh token not available.")
-                    window.location.href = '/login/'
+                    window.location.href = '/force-logout/'
                 }
         }
       

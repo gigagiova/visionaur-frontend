@@ -1,18 +1,35 @@
 import '../styles/navbar.css'
-import { popupActions } from '../store/redux'
-import { useDispatch, useSelector } from 'react-redux'
+import React from 'react'
+import { connect } from 'react-redux'
+import { popupActions, userActions } from '../store/redux'
 
 const NavBar = props => {
 
-    const dispatch = useDispatch()
-    const user = useSelector(state => state.user)
-    
     return(
         <div className="navbar-background">
-            <span className="navbar-title">{props.title}</span>
-            { !user && <button className="navbar-button" onClick={() => dispatch(popupActions.changePopup('Login'))}>Log in</button>}
+            <div className="box">
+                { props.leftButton ? 
+                    <button className="navbar-button" style={{marginRight: "auto"}} onClick={props.leftButton.onClick}>{props.leftButton.text}</button> :
+                    <button className="navbar-button" style={{visibility: "hidden"}}>hidden</button>
+                }
+            </div>
+            <div className="box"><span className="navbar-title">{props.title}</span></div>
+            <div className="box">
+                { props.user ? 
+                    <button className="navbar-button" style={{marginLeft: "auto"}} onClick={props.logout}>Log out</button> :
+                    <button className="navbar-button" style={{marginLeft: "auto"}} onClick={props.login}>Log in</button>
+                }
+            </div>
         </div>
     )
 }
 
-export default NavBar
+const mapStateToProps = state => { return {user: state.user.user}}
+const mapDispatchToProps = dispatch => {
+    return {
+        logout: () => dispatch(userActions.logout()),
+        login: () => dispatch(popupActions.changePopup('Login'))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar)

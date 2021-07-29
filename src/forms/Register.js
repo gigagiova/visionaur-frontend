@@ -85,12 +85,10 @@ const Register = () => {
                 axiosInstance.defaults.headers['Authorization'] = "JWT " + response.data.access
                 localStorage.setItem('access_token', response.data.access)
                 localStorage.setItem('refresh_token', response.data.refresh)
-                localStorage.setItem('first_name', response.data.first_name)
-                localStorage.setItem('last_name', response.data.last_name)
 
-                dispatch(userActions.login({first_name: response.data.first_name, last_name: response.data.last_name}))
+                dispatch(userActions.login(response.data))
                 dispatch(popupActions.changePopup(null))
-                history.push("/onboarding")
+                history.push("/edit-profile")
             }
         })
         .catch(error => console.log(error))

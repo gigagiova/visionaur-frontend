@@ -22,6 +22,36 @@
     border-bottom: 2px solid rgba(0,0,0,0.1);
 }
 
+.name {
+    font-size: medium;
+    font-weight: bold;
+    text-align: center;
+    display: block;
+    padding: 5%;
+}
+
+.name-input {
+    margin: 0;
+    border: none;
+    text-align: center;
+    font-size: medium;
+    padding: 1%;
+    border-radius: 0;
+    width: 30%;
+    border-bottom: 2px solid rgba(0,0,0,0);
+}
+
+.name-input:focus {
+    outline: none;
+    border: none;
+    border-bottom: 2px solid rgba(0,0,0,0.1); 
+}
+
+.bio {
+    margin: 0 5%;
+    text-align: left;
+    font-size: medium;
+}
 
 @media (min-width: 670px) {
     .profile-picture {
@@ -34,5 +64,19 @@
     .profile-picture {
         width: 30%;
         margin: 0 35%;
+    }
+
+    .name {
+        font-size: x-large;
+    }
+
+    .name-input {
+        font-size: x-large;
+    }
+
+    .bio {
+        margin: 0 10%;
+        text-align: center;
+        font-size: large;
     }
 }
