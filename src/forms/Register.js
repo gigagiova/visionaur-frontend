@@ -87,7 +87,7 @@ const Register = () => {
                 localStorage.setItem('refresh_token', response.data.refresh)
 
                 dispatch(userActions.login(response.data))
-                dispatch(popupActions.changePopup(null))
+                dispatch(popupActions.changePopup({content: null}))
                 history.push("/edit-profile")
             }
         })
@@ -107,7 +107,7 @@ const Register = () => {
                     Sign Up
                 </button>
             </form>
-            <p className="link-text" onClick={() => dispatch(popupActions.changePopup('Login'))} style={{margin: "0 0 5%"}}>Already have an account? Sign in</p>
+            <p className="link-text" onClick={() => dispatch(popupActions.changePopup({content: 'Login'}))} style={{margin: "0 0 5%"}}>Already have an account? Sign in</p>
         </div>
     )
 }

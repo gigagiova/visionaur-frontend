@@ -6,6 +6,7 @@ import '../styles/page.css'
 import '../styles/profile.css'
 import NavBar from '../components/NavBar'
 import { Redirect, useHistory } from 'react-router-dom'
+import SkillsList from '../components/SkillsList'
 
 
 const Profile = props => {
@@ -17,6 +18,8 @@ const Profile = props => {
         if (props.user?.profile_pic) setImage(mediaBaseURL + props.user.profile_pic)
     }, [props.user])
 
+    console.log(props.user)
+
     return (
         <>
             {!props.user && <Redirect to="/"/>}
@@ -26,6 +29,7 @@ const Profile = props => {
                 <span className="name">{props.user?.first_name} {props.user?.last_name}</span>
                 <p className="bio">{props.user?.bio}</p>
                 <button style={{margin: "3% auto", display: "block"}}>New project</button>
+                <SkillsList list={props.user?.skills}/>
             </div>
         </>
     )

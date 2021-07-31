@@ -4,12 +4,16 @@ import reactDom from "react-dom"
 import { useSelector } from 'react-redux'
 import Register from '../forms/Register'
 import Login from '../forms/Login'
+import AddSkill from '../popupContents.js/AddSkill'
+import DeleteSkill from '../popupContents.js/DeleteSkill'
 
 
 // don't really like it, but for now is ok
 const contents = {
   Login: <Login/>,
   Register: <Register/>,
+  AddSkill: <AddSkill/>,
+  DeleteSkill: <DeleteSkill/>,
   null: null
 }
 
@@ -17,32 +21,28 @@ const contents = {
 const Popup = props => {
 
     const panel = useRef();
-    const content = useSelector(state => state.popup.popupContent)
+    const content = useSelector(state => state.popup)
     
     const handleClick = e => {
-        if (panel.current && panel.current.contains(e.target)) {
-          // inside click
-          return;
-        }
-        // outside click
-        props.close();
-      };
+      //inside click
+      if (panel.current && panel.current.contains(e.target)) return
+      // outside click
+      props.close()
+    }
 
     useEffect(() => {
-        // add when mounted
-        document.addEventListener("mousedown", handleClick);
-        // return function to be called when unmounted
-        return () => {
-          document.removeEventListener("mousedown", handleClick);
-        };
-      }, []);
+      // add when mounted
+      document.addEventListener("mousedown", handleClick)
+      // return function to be called when unmounted
+      return () => document.removeEventListener("mousedown", handleClick)
+    }, []);
 
     return reactDom.createPortal(
       <>
-        {content && 
+        {content.popupContent && 
           <div className="overlay">
             <div className="popup-background" ref={panel}>
-                {contents[content]}
+                {contents[content.popupContent]}
             </div>
           </div>
         } 

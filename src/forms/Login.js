@@ -52,7 +52,7 @@ const Login = () => {
             } else {
                 axiosInstance.defaults.headers['Authorization'] = "JWT " + response.data.access
                 dispatch(userActions.login(response.data))
-                dispatch(popupActions.changePopup(null))
+                dispatch(popupActions.changePopup({content: null}))
                 history.push("/profile")
             }
         })
@@ -70,7 +70,7 @@ const Login = () => {
                     Sign In
                 </button>
             </form>
-            <p className="link-text" style={{margin: "0 0 5%"}} onClick={() => dispatch(popupActions.changePopup('Register'))}>Don't have an account? Sign up</p>
+            <p className="link-text" style={{margin: "0 0 5%"}} onClick={() => dispatch(popupActions.changePopup({content: 'Register'}))}>Don't have an account? Sign up</p>
         </div>
     )
 

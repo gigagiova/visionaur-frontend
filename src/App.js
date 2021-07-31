@@ -31,7 +31,7 @@ const App = () => {
         <Route path="/force-logout"><ForceLogout/></Route>
       </Switch>
       
-      <Popup close={() => dispatch(popupActions.changePopup(null))}/>
+      <Popup close={() => dispatch(popupActions.changePopup({content: null}))}/>
     </>
   );
 }

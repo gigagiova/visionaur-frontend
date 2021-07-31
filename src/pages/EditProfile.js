@@ -10,6 +10,7 @@ import '../styles/popup.css'
 import ChangeUsername from '../inputs/ChangeUsername'
 import { Redirect, useHistory } from 'react-router-dom'
 import { userActions } from '../store/redux'
+import SkillsList from '../components/SkillsList'
 
 
 const EditProfile = () => {
@@ -38,9 +39,12 @@ const EditProfile = () => {
         form.append('first_name', FN)
         form.append('last_name', SN)
         if (blob) form.append('profile_pic', blob, `${username}_propic.png`)
+        // not the best but works for now
+        form.append('stringified_skills', JSON.stringify(user.skills))
 
         axiosInstance.put('/user/account/', form, {headers: {'Content-Type': 'multipart/form-data',}})
         .then (res => dispatch(userActions.update(res.data)))
+        .catch(err => console.log(err))
         history.push('/profile')
     }
 
@@ -55,6 +59,7 @@ const EditProfile = () => {
                 <input className="name-input" style={{textAlign: "left"}} onChange={e => setSN(e.target.value)} value={SN}/>
                 <ChangeUsername value={username} onChange={u => setUsername(u)}/>
                 <textarea value={bio} onChange={e => setBio(e.target.value)} maxLength="256" placeholder="write something about you"/>
+                <SkillsList list={user?.skills} edit={true}/>
                 <button onClick={updateProfile}>Update</button>
             </form>
         </div>

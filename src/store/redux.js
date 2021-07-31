@@ -6,7 +6,8 @@ const popupSlice = createSlice({
     initialState: { popupContent: null },
     reducers: {
         changePopup(state, action) {
-            state.popupContent = action.payload
+            state.popupContent = action.payload.content
+            if (action.payload.data) state.data = action.payload.data
         }
     }
 })
@@ -36,8 +37,9 @@ const userSlice = createSlice({
                 username: action.payload.username,
                 email: action.payload.email,
                 bio: action.payload.bio,
-                profile_pic: action.payload.profile_pic
-            }  
+                profile_pic: action.payload.profile_pic,
+                skills: action.payload.skills
+            }
 
             if (action.payload.access) localStorage.setItem('access_token', action.payload.access)
             if (action.payload.refresh) localStorage.setItem('refresh_token', action.payload.refresh)
@@ -49,13 +51,21 @@ const userSlice = createSlice({
                 username: action.payload.username,
                 email: action.payload.email,
                 bio: action.payload.bio,
-                profile_pic: action.payload.profile_pic
-            }  
+                profile_pic: action.payload.profile_pic,
+            } 
+
+            if (action.payload.skills) state.user.skills = action.payload.skills
         },
         logout(state) {
             state.user = null
             localStorage.removeItem('access_token')
             localStorage.removeItem('refresh_token')
+        },
+        addSkill(state, action) {
+            state.user.skills.push(action.payload)
+        },
+        removeSkill(state, action) {
+            state.user.skills = state.user.skills.filter(s => s.skill.id!==action.payload.id)
         }
     }
 })

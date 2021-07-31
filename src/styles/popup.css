@@ -27,6 +27,38 @@
     font-size: 4vh;
 }
 
+.scroll {
+    overflow: auto;
+    max-height: 40vh;
+    margin: 1em 15%;
+}
+
+.scroll-element {
+    box-sizing: border-box;
+    border-radius: 0.5em;
+    margin-block: 0;
+    padding: 0.5em;
+    cursor: pointer;
+}
+
+.scroll-element:hover {
+    font-weight: bold;
+}
+
+.selected {
+    font-weight: bold;
+    background: linear-gradient(to right, white, transparent);
+}
+
+.popup-button {
+    display: block;
+    margin: 3% auto;
+}
+
+.popup-text {
+    margin: 5%;
+}
+
 @media (min-width: 670px) {
     .popup-background {
         width: 60%;

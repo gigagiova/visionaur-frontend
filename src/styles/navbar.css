@@ -20,7 +20,7 @@
     padding: 6%;
     background-color: white;
     color: var(--theme-color);
-    font-size: medium;
+    font-size: small;
 }
 
 .navbar-button:hover {
@@ -46,5 +46,6 @@
 
     .navbar-button {
         padding: 4%;
+        font-size: medium;
     }
 }
