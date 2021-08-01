@@ -55,8 +55,8 @@ const EditProfile = () => {
         {!user && <Redirect to="/"/>}
             <form>
                 <ChangePropic setBlob={setBlob}/>
-                <input className="name-input" style={{textAlign: "right"}} onChange={e => setFN(e.target.value)} value={FN}/>
-                <input className="name-input" style={{textAlign: "left"}} onChange={e => setSN(e.target.value)} value={SN}/>
+                <input className="name-input" style={{textAlign: "right"}} onChange={e => setFN(e.target.value.replace(/[^a-zA-Z\s]/, ''))} value={FN}/>
+                <input className="name-input" style={{textAlign: "left"}} onChange={e => setSN(e.target.value.replace(/[^a-zA-Z\s]/, ''))} value={SN}/>
                 <ChangeUsername value={username} onChange={u => setUsername(u)}/>
                 <textarea value={bio} onChange={e => setBio(e.target.value)} maxLength="256" placeholder="write something about you"/>
                 <SkillsList list={user?.skills} edit={true}/>

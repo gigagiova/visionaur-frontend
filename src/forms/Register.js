@@ -32,7 +32,7 @@ const Register = () => {
 
     const handleFNChange = event => {
         if(event.target.value.length <= 35){
-            setFN(event.target.value)
+            setFN(event.target.value.replace(/[^a-zA-Z\s]/, ''))
         }
         if(event.target.value.length > 1) {
             setFNValid(true)
@@ -45,7 +45,7 @@ const Register = () => {
 
     const handleLNChange = event => {
         if(event.target.value.length <= 35){
-            setLN(event.target.value)
+            setLN(event.target.value.replace(/[^a-zA-Z\s]/, ''))
         }
         if(event.target.value.length > 1) {
             setLNValid(true)

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { connect, useSelector } from "react-redux"
+import { connect } from "react-redux"
 import axiosInstance from "../API/axios"
 import DropDown from "../components/DropDown"
 import { levels } from "../components/Skill"
@@ -12,8 +12,6 @@ const AddSkill = props => {
     const [level, setLevel] = useState(null)
     const [query, setQuery] = useState('')
     const [selected, setSelected] = useState(null) // the ID of the selected skill
-    
-    const popup = useSelector(state => state.popup)
 
     useEffect(() => {
         axiosInstance.get('/user/skills/')
@@ -37,7 +35,7 @@ const AddSkill = props => {
                             className={sel ? "scroll-element selected"  : "scroll-element" }
                             onClick={() => {if (selected) setLevel(null); setSelected(sel ? null : s.id)}}>{s.name}</p>
                         )
-                    }
+                    } else return <div/>
                 })}
             </div>
             {level && selected ? 

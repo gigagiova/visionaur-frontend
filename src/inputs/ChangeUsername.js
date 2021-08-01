@@ -8,7 +8,7 @@ const ChangeUsername = props => {
     const [valid, setValid] = useState(true)
 
     const onUsernameChange = e => {
-        props.onChange(e.target.value)
+        props.onChange(e.target.value.replace(/[^a-zA-Z0-9\.]/, ''))
         axiosInstance.post('user/check-username/', {username: e.target.value})
         .then(res => {
             if (res.data.available) setValid(true)

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { connect, useSelector } from 'react-redux'
+import { connect } from 'react-redux'
 import blank from '../assets/blank.png'
 import { mediaBaseURL } from '../API/utils'
 import '../styles/page.css'
