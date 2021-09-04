@@ -5,7 +5,6 @@ import Skill from "./Skill"
 const SkillsList = props => {
     
     const dispatch = useDispatch()
-
     if (!props.list) return(<></>)
 
     return (

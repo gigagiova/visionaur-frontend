@@ -15,8 +15,6 @@ const DeleteSkill = () => {
         dispatch(popupActions.changePopup({content: null}))
     }
 
-    console.log(data)
-
     return(
         <div>
             <h2 className="popup-title">Delete</h2>

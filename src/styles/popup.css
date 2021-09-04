@@ -27,13 +27,13 @@
     font-size: 4vh;
 }
 
-.scroll {
+.popup-scroll {
     overflow: auto;
     max-height: 40vh;
     margin: 1em 15%;
 }
 
-.scroll-element {
+.popup-scroll-element {
     box-sizing: border-box;
     border-radius: 0.5em;
     margin-block: 0;
@@ -45,7 +45,7 @@
     font-weight: bold;
 }
 
-.selected {
+.skill-selected {
     font-weight: bold;
     background: linear-gradient(to right, white, transparent);
 }

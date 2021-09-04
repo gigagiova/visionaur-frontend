@@ -18,17 +18,15 @@ const Profile = props => {
         if (props.user?.profile_pic) setImage(mediaBaseURL + props.user.profile_pic)
     }, [props.user])
 
-    console.log(props.user)
-
     return (
         <>
             {!props.user && <Redirect to="/"/>}
             <NavBar title={props.user?.username} leftButton={{text: "Edit", onClick: () => history.push("/edit-profile")}}/>
             <div className="page">
                 <img alt='profile' className="profile-picture" src={image}/>
-                <span className="name">{props.user?.first_name} {props.user?.last_name}</span>
+                <span className="name">{props.user?.name}</span>
                 <p className="bio">{props.user?.bio}</p>
-                <button style={{margin: "3% auto", display: "block"}}>New project</button>
+                <button style={{margin: "3% auto", display: "block"}} onClick={() => history.push("/new-project")}>New project</button>
                 <SkillsList list={props.user?.skills}/>
             </div>
         </>

@@ -32,28 +32,25 @@ const userSlice = createSlice({
     reducers: {
         login(state, action) {
             state.user = {
-                first_name: action.payload.first_name,
-                last_name: action.payload.last_name,
+                name: action.payload.name,
                 username: action.payload.username,
                 email: action.payload.email,
                 bio: action.payload.bio,
                 profile_pic: action.payload.profile_pic,
                 skills: action.payload.skills
             }
-
+            
             if (action.payload.access) localStorage.setItem('access_token', action.payload.access)
             if (action.payload.refresh) localStorage.setItem('refresh_token', action.payload.refresh)
         },
         update(state, action) {
             state.user = {
-                first_name: action.payload.first_name,
-                last_name: action.payload.last_name,
+                name: action.payload.name,
                 username: action.payload.username,
                 email: action.payload.email,
                 bio: action.payload.bio,
                 profile_pic: action.payload.profile_pic,
-            } 
-
+            }
             if (action.payload.skills) state.user.skills = action.payload.skills
         },
         logout(state) {
@@ -61,11 +58,19 @@ const userSlice = createSlice({
             localStorage.removeItem('access_token')
             localStorage.removeItem('refresh_token')
         },
+        editSkills(state) {
+            // creates a copy of the user's skills to edit them
+            state.user.tempSkills = state.user.skills
+        },
+        finishEdit(state) {
+            // delete the temporary skills copy
+            delete state.user.tempSkills
+        },
         addSkill(state, action) {
-            state.user.skills.push(action.payload)
+            state.user.tempSkills.push(action.payload)
         },
         removeSkill(state, action) {
-            state.user.skills = state.user.skills.filter(s => s.skill.id!==action.payload.id)
+            state.user.tempSkills = state.user.tempSkills.filter(s => s.skill.id!==action.payload.id)
         }
     }
 })

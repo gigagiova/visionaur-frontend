@@ -7,7 +7,7 @@ import '../styles/page.css'
 import '../styles/profile.css'
 import '../styles/image-crop.css'
 import '../styles/popup.css'
-import ChangeUsername from '../inputs/ChangeUsername'
+import onUsernameChange from '../inputs/onUsernameChange'
 import { Redirect, useHistory } from 'react-router-dom'
 import { userActions } from '../store/redux'
 import SkillsList from '../components/SkillsList'
@@ -17,30 +17,38 @@ const EditProfile = () => {
     
     const user = useSelector(state => state.user.user)
     const [username, setUsername] = useState('')
-    const [FN, setFN] = useState('')
-    const [SN, setSN] = useState('')
+    const [name, setName] = useState('')
     const [bio, setBio] = useState('')    
     const [blob, setBlob] = useState(null)
+    const [usernameValid, setUsernameValid] = useState(true)
     const history = useHistory()
     const dispatch = useDispatch()
 
     useEffect(() => {
         if (user?.username) setUsername(user.username)
-        if (user?.first_name) setFN(user.first_name)
-        if (user?.last_name) setSN(user.last_name)
+        if (user?.name) setName(user.name)
         if (user?.bio) setBio(user.bio)
-    }, [user])
+
+        // create a copy of the skills to edit them
+        // we depend on the username to not cause rerenders when we add temporary skills
+        dispatch(userActions.editSkills())
+        // delete the temporary copy on unmount
+        return () => dispatch(userActions.finishEdit())
+    }, [user.username, user.name, user.bio, dispatch])
+
+    useEffect(() => {
+
+    }, [user.username])
 
     const updateProfile = e => {
         e.preventDefault()
         let form = new FormData()
         form.append('username', username)
         form.append('bio', bio)
-        form.append('first_name', FN)
-        form.append('last_name', SN)
+        form.append('name', name)
         if (blob) form.append('profile_pic', blob, `${username}_propic.png`)
         // not the best but works for now
-        form.append('stringified_skills', JSON.stringify(user.skills))
+        form.append('stringified_skills', JSON.stringify(user.tempSkills))
 
         axiosInstance.put('/user/account/', form, {headers: {'Content-Type': 'multipart/form-data',}})
         .then (res => dispatch(userActions.update(res.data)))
@@ -54,12 +62,14 @@ const EditProfile = () => {
         <div className="page">
         {!user && <Redirect to="/"/>}
             <form>
-                <ChangePropic setBlob={setBlob}/>
-                <input className="name-input" style={{textAlign: "right"}} onChange={e => setFN(e.target.value.replace(/[^a-zA-Z\s]/, ''))} value={FN}/>
-                <input className="name-input" style={{textAlign: "left"}} onChange={e => setSN(e.target.value.replace(/[^a-zA-Z\s]/, ''))} value={SN}/>
-                <ChangeUsername value={username} onChange={u => setUsername(u)}/>
+                <ChangePropic setBlob={setBlob} profile={true}/>
+                <input className="underline-input" onChange={e => setName(e.target.value.replace(/[^a-zA-Z\s]/, ''))} value={name}/>
+                <input 
+                    className= "underline-input" style={ usernameValid ? {} : {borderBottom: "2px solid lightcoral"}} 
+                    type="text" value={username} onChange={e => onUsernameChange(e, setUsername, setUsernameValid)}
+                />
                 <textarea value={bio} onChange={e => setBio(e.target.value)} maxLength="256" placeholder="write something about you"/>
-                <SkillsList list={user?.skills} edit={true}/>
+                <SkillsList list={user.tempSkills} edit={true}/>
                 <button onClick={updateProfile}>Update</button>
             </form>
         </div>

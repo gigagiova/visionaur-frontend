@@ -20,7 +20,7 @@ const ChangePropic = props => {
     const [defaultImage, setDefaultImage] = useState(blank)
 
     useEffect(() => {
-        if (user?.profile_pic) {
+        if (props.profile && user?.profile_pic) {
             setDefaultImage(mediaBaseURL + user.profile_pic)
         }
     }, [user])
@@ -107,7 +107,7 @@ const ChangePropic = props => {
                 <img alt='profile' className="profile-picture" src={defaultImage}/>
             )}
             <label className="input-file">
-                Change profile image
+                Change image
                 <input type="file" name="picture" style={{display: "none"}} accept=".png, .jpg, .jpeg" onChange={handleFileInput}/>
             </label>
             {popup && (

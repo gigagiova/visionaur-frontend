@@ -5,17 +5,18 @@ import { emailRE } from './inputChecks'
 import { useDispatch } from 'react-redux'
 import { popupActions, userActions } from '../store/redux'
 import { useHistory } from 'react-router-dom'
+import onUsernameChange from '../inputs/onUsernameChange'
 
 
 const Register = () => {
     
     const [email, setEmail] = useState('')
     const [firstName, setFN] = useState('')
-    const [lastName, setLN] = useState('')
+    const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [emailValid, setEmailValid] = useState(false)
-    const [FNValid, setFNValid] = useState(false)
-    const [LNValid, setLNValid] = useState(false)
+    const [usernameValid, setUsernameValid] = useState(false)
+    const [NameValid, setNameValid] = useState(false)
     const [passwordValid, setPasswordValid] = useState(false)
     const [formValid, setFormalid] = useState(false)
     const [error, setError] = useState(null)
@@ -27,31 +28,18 @@ const Register = () => {
         setEmail(event.target.value)
         const validE = emailRE.test(event.target.value)
         setEmailValid(validE)
-        setFormalid(validE && FNValid && LNValid && passwordValid)
+        setFormalid(validE && NameValid && usernameValid && passwordValid)
     }
 
-    const handleFNChange = event => {
-        if(event.target.value.length <= 35){
-            setFN(event.target.value.replace(/[^a-zA-Z\s]/, ''))
+    const handleNameChange = event => {
+        if(event.target.value.length <= 60){
+            setFN(event.target.value.replace(/^\s+|\s(?=\s)|[^a-zA-Z\s]/, ''))
         }
         if(event.target.value.length > 1) {
-            setFNValid(true)
-            setFormalid(emailValid && LNValid && passwordValid)
+            setNameValid(true)
+            setFormalid(emailValid && usernameValid && passwordValid)
         } else {
-            setFNValid(false)
-            setFormalid(false)
-        }
-    }
-
-    const handleLNChange = event => {
-        if(event.target.value.length <= 35){
-            setLN(event.target.value.replace(/[^a-zA-Z\s]/, ''))
-        }
-        if(event.target.value.length > 1) {
-            setLNValid(true)
-            setFormalid(emailValid && FNValid && passwordValid)
-        } else {
-            setLNValid(false)
+            setNameValid(false)
             setFormalid(false)
         }
     }
@@ -62,7 +50,7 @@ const Register = () => {
         }
         if(event.target.value.length > 5) {
             setPasswordValid(true)
-            setFormalid(emailValid && FNValid && LNValid)
+            setFormalid(emailValid && NameValid && usernameValid)
         } else {
             setPasswordValid(false)
             setFormalid(false)
@@ -73,8 +61,8 @@ const Register = () => {
         event.preventDefault()
         axiosInstance.post('/user/register/', {
             "email": email,
-            "first_name": firstName,
-            "last_name": lastName,
+            "name": firstName,
+            "username": username,
             "password": password
         })
         .then(response => {
@@ -100,8 +88,8 @@ const Register = () => {
             <form>
                 {error && <p className="error-text">{error}</p>}
                 <input type="email" className={emailValid ? "input-valid" : null} value={email} onChange={handleEmailChange} placeholder='Email'/>
-                <input type="text" className={FNValid ? "input-valid" : null} style={{width: "43%"}} value={firstName} onChange={handleFNChange} placeholder='First Name'/>
-                <input type="text" className={LNValid ? "input-valid" : null} style={{width: "43%"}} value={lastName} onChange={handleLNChange} placeholder='Last Name'/>
+                <input type="text" className={NameValid ? "input-valid" : null} value={firstName} onChange={handleNameChange} placeholder='Name'/>
+                <input type="text" className={usernameValid ? "input-valid" : null} value={username} onChange={e => onUsernameChange(e, setUsername, setUsernameValid)} placeholder='Username'/>
                 <input type="password" className={passwordValid ? "input-valid" : null} value={password} onChange={handlePasswordChange} autoComplete='on' placeholder='Password'/>
                 <button  style={{width: "50%"}} disabled={!formValid} onClick={handleSubmit}>
                     Sign Up

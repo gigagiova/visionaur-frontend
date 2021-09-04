@@ -19,23 +19,21 @@ const AddSkill = props => {
         .catch(err => console.log(err))
     }, [])
 
-
-
     return (
         <div>
             <h2 className="popup-title">Add new skill</h2>
             <input placeholder="search" value={query} onChange={e => setQuery(e.target.value)} style={{margin: "1em 5%"}}></input>
-            <div className="scroll">
+            <div className="popup-scroll">
                 {skills.map(s => {
                     // only show skills the users doesn't have yet, filtered by our search
-                    if (!props.user.skills.find(us => us.skill.name===s.name) && s.name.toLowerCase().includes(query)) {
+                    if (!props.user.tempSkills.find(us => us.skill.name===s.name) && s.name.toLowerCase().includes(query)) {
                         const sel = s.id===selected
                         return (
                             <p key={s.id} 
-                            className={sel ? "scroll-element selected"  : "scroll-element" }
+                            className={"popup-scroll-element" + (sel ? " skill-selected"  : "")}
                             onClick={() => {if (selected) setLevel(null); setSelected(sel ? null : s.id)}}>{s.name}</p>
                         )
-                    } else return <div/>
+                    } else return null
                 })}
             </div>
             {level && selected ? 

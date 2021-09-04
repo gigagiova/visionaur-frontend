@@ -9,6 +9,7 @@ import ForceLogout from './pages/ForceLogout'
 import { useEffect } from 'react'
 import axiosInstance from './API/axios'
 import Profile from './pages/Profile'
+import EditProject from './pages/EditProject'
 
 const App = () => {
   
@@ -29,6 +30,7 @@ const App = () => {
         <Route path="/profile" exact><Profile/></Route>
         <Route path="/edit-profile"><ProfileSetup/></Route>
         <Route path="/force-logout"><ForceLogout/></Route>
+        <Route path="/new-project"><EditProject/></Route>
       </Switch>
       
       <Popup close={() => dispatch(popupActions.changePopup({content: null}))}/>

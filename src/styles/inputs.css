@@ -1,0 +1,19 @@
+
+.scroll {
+    overflow: auto;
+    max-height: 8em;
+    margin: 1em 15%;
+}
+
+.scroll-element {
+    box-sizing: border-box;
+    border-radius: 0.25em;
+    margin-block: 0;
+    padding: 0.25em;
+    cursor: pointer;
+}
+
+.scroll-selected {
+    font-weight: bold;
+    text-decoration: underline;
+}
