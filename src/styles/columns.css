@@ -1,0 +1,14 @@
+
+@media (min-width: 670px) {
+    .left-column {
+        width: 70%;
+        position: relative;
+        float: left;
+    }
+
+    .right-column {
+        width: 30%;
+        position: relative;
+        float: left;
+    }
+}

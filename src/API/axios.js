@@ -79,9 +79,6 @@ axiosInstance.interceptors.response.use(
                 }
         }
       
-     
-      // specific error handling done elsewhere
-      if (error.response.status !== 500) window.location.href = '/force-logout/'
       return Promise.reject(error);
   }
 )

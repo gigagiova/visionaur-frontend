@@ -1,9 +1,19 @@
 
-
 .profile-picture {
-    width: 40%;
-    margin: 0 30%;
+    width: 30%;
     border-radius: 100%;
+}
+
+.right-div {
+    width: 70%;
+    padding: 0 5%;
+    box-sizing: border-box;
+}
+
+.profile-header {
+    display: flex;
+    align-items: flex-start;
+    padding-bottom: 2em;
 }
 
 .underline-input {
@@ -24,13 +34,12 @@
 .name {
     font-size: medium;
     font-weight: bold;
-    text-align: center;
     display: block;
-    padding: 5%;
+    padding-bottom: 2%;
 }
 
 .bio {
-    margin: 0 5%;
+    margin: 0;
     text-align: left;
     font-size: medium;
 }
@@ -45,18 +54,34 @@
 
 @media (min-width: 670px) {
     .profile-picture {
-        width: 30%;
-        margin: 0 35%;
+        width: 25%;
     }
+
+    .name {
+        font-size: larger;
+    }
+
+    .bio {
+        font-size: medium;
+    }
+
+    .right-div {
+        width: 75%;
+    }
+
     .skills-list {
         max-width: 60%;
     }
 }
 
 @media (min-width: 990px) {
-    .profile-picture {
-        width: 30%;
-        margin: 0 35%;
+
+    .profile-header {
+        align-items: center;
+    }
+
+    .right-div {
+        width: 80%;
     }
 
     .name {
@@ -64,8 +89,6 @@
     }
 
     .bio {
-        margin: 0 10%;
-        text-align: center;
         font-size: large;
     }
 
@@ -75,6 +98,12 @@
 
     .underline-input {
         width: 50%;
-        margin: 2% 25%;
+        margin: 0 25%;
+    }
+}
+
+@media (min-width: 1024px){
+    .profile-picture {
+        width: 15%;
     }
 }

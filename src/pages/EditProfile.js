@@ -50,7 +50,7 @@ const EditProfile = () => {
         // not the best but works for now
         form.append('stringified_skills', JSON.stringify(user.tempSkills))
 
-        axiosInstance.put('/user/account/', form, {headers: {'Content-Type': 'multipart/form-data',}})
+        axiosInstance.put('/users/my-account/', form, {headers: {'Content-Type': 'multipart/form-data',}})
         .then (res => dispatch(userActions.update(res.data)))
         .catch(err => console.log(err))
         history.push('/profile')

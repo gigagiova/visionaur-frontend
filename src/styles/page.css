@@ -9,12 +9,9 @@
 @media (min-width: 670px) {
     .page {
         width: 80%;
+        padding: 2% 5%;
     }
 }
 
 @media (min-width: 990px) {
-    .page {
-        padding: 2%;
-        width: 60%;
-    }
 }

@@ -9,7 +9,7 @@ const ChooseSkills = props => {
     const [query, setQuery] = useState('')
 
     useEffect(() => {
-        axiosInstance.get('/user/skills/')
+        axiosInstance.get('/users/skills/')
         .then(res => setSkills(res.data))   
         .catch(err => console.log(err))
     }, [])
@@ -26,7 +26,7 @@ const ChooseSkills = props => {
                             className={"scroll-element" + (sel ? " scroll-selected"  : "")}
                             onClick={() => sel ? props.setSelected(p => p.filter(id => id !== s.id)) : props.setSelected(p => [...p, s.id])}>{s.name}</p>
                         )
-                    }
+                    } else return (<></>)
 
                 })}
             </div>

@@ -1,0 +1,68 @@
+
+.card-profile-pic {
+    width: 20%;
+    border-radius: 100%;
+}
+
+.proile-card-text {
+    width: 80%;
+    box-sizing: border-box;
+    padding: 5%;
+}
+
+.profile-card {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    width: 90%;
+    margin: 1% 5%;
+}
+
+.card-name {
+    font-size: medium;
+    font-weight: bold;
+    text-align: left;
+    margin: 0;
+}
+
+.card-username {
+    text-align: left;
+    margin: 0;
+}
+
+.tag {
+    padding: 0.3em 0.6em;
+    background-color: #d5e5fe;
+    border-radius: 0.3em;
+    margin: 0.25em;
+    color: cornflowerblue;
+    width: fit-content;
+    display: inline-block;
+}
+
+.project-card {
+    cursor: pointer;
+    box-sizing: border-box;
+    padding: 1.5em;
+    border-radius: 1em;
+    box-shadow: 0 0 6px 0 gray;
+}
+
+.card-title {
+    font-size: large;
+    font-weight: bold;
+    text-align: left;
+    margin: 0 0 1em;
+}
+
+@media (min-width: 670px) {
+    .profile-card {
+        width: 100%;
+        margin: 1% 0;
+    }
+
+}
+
+@media (min-width: 990px) {
+
+}

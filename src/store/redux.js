@@ -37,7 +37,8 @@ const userSlice = createSlice({
                 email: action.payload.email,
                 bio: action.payload.bio,
                 profile_pic: action.payload.profile_pic,
-                skills: action.payload.skills
+                skills: action.payload.skills,
+                projects: action.payload.projects
             }
             
             if (action.payload.access) localStorage.setItem('access_token', action.payload.access)
@@ -50,6 +51,7 @@ const userSlice = createSlice({
                 email: action.payload.email,
                 bio: action.payload.bio,
                 profile_pic: action.payload.profile_pic,
+                projects: action.payload.projects
             }
             if (action.payload.skills) state.user.skills = action.payload.skills
         },

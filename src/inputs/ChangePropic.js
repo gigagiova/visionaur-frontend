@@ -97,7 +97,7 @@ const ChangePropic = props => {
     }
 
     return (
-        <div>
+        <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
             {selectedPicture ? (
                 <canvas
                 ref={previewCanvasRef}

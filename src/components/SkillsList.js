@@ -9,6 +9,7 @@ const SkillsList = props => {
 
     return (
         <div>
+            <h2>Skills</h2>
             <ul className="skills-list">
                 {props.list.map(s => (
                     <Skill data={s} edit={props.edit} key={s.skill.id}/>

@@ -11,6 +11,10 @@ h1, h2, p, button, div {
     color: rgba(0, 0, 0, 0.8);
 }
 
+h1, h2 {
+    text-align: center;
+}
+
 form {
     margin: 2% auto;
     text-align: center;
@@ -99,7 +103,7 @@ textarea:focus {
 .input-file {
     text-align: center;
     cursor: pointer;
-    margin: 2%;
+    margin: 0;
     border-radius: 16px;
     display: inline-block;
     text-decoration: underline;

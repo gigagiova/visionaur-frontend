@@ -59,7 +59,7 @@ const Register = () => {
 
     const handleSubmit = event => {
         event.preventDefault()
-        axiosInstance.post('/user/register/', {
+        axiosInstance.post('/users/register/', {
             "email": email,
             "name": firstName,
             "username": username,

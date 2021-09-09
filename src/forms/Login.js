@@ -40,7 +40,7 @@ const Login = () => {
 
     const handleSubmit = event => {
         event.preventDefault()
-        axiosInstance.post('/user/login/', {
+        axiosInstance.post('/users/login/', {
             "email": email,
             "password": password
         })

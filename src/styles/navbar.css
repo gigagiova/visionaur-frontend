@@ -35,10 +35,13 @@
     justify-content: center;
   }
 
-@media (min-width: 990px) {
+@media (min-width: 670px) {
     .navbar-background {
         padding: 1em 10%;
     }
+}
+
+@media (min-width: 990px) {
 
     .navbar-title {
         font-size: large;

@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux"
 import { popupActions } from "../store/redux"
+import "../styles/cards.css"
 
 export const levels = {
     B: 'Beginner',
@@ -21,11 +22,11 @@ const Skill = props => {
 
     return (
         <div onClick={onClick}>
-            <p>{props.data.skill.name} - {levels[props.data.level]} 
+            <p className="tag">{props.data.skill.name}, {levels[props.data.level]} 
                 {props.edit && <span 
                     onClick={() => dispatch(popupActions.changePopup({content: 'DeleteSkill', data: props.data}))} 
                     style={{color: "orangered"}}>
-                        {" "}delete
+                        {"  "} Delete
                 </span>}
             </p>
         </div>

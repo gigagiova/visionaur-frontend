@@ -14,7 +14,7 @@ const AddSkill = props => {
     const [selected, setSelected] = useState(null) // the ID of the selected skill
 
     useEffect(() => {
-        axiosInstance.get('/user/skills/')
+        axiosInstance.get('/users/skills/')
         .then(res => setSkills(res.data))   
         .catch(err => console.log(err))
     }, [])

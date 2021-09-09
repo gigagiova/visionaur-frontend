@@ -53,7 +53,8 @@ const EditProject = () => {
             ],
             skills_list: selectedSkills
         })
-        .then(res => console.log(res.data))
+        .then(res => history.push("/project/" + res.data.slug))
+        .catch(err => console.log(err))
     }
 
     return(
