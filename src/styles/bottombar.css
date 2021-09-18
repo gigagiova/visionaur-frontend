@@ -1,0 +1,46 @@
+
+.bar-background {
+    display: flex;
+    justify-content: space-around;
+    position: fixed;
+    bottom: 0;
+    border-radius: 32px;
+    padding: 0;
+    box-sizing: border-box;
+    background: rgba( 255, 255, 255, 0.8 );
+    box-shadow: 0 0 6px 0 lightgray;
+    backdrop-filter: blur(10px);
+    width: 100%;
+    height: fit-content;
+}
+
+.bottom-icon {
+    width: 4vh;
+    margin: 2vh;
+    display: block;
+}
+
+.pic {
+    border-radius: 100%;
+}
+
+.active-bottom-icon > svg {
+    fill: black;
+}
+
+.active-bottom-icon > .pic {
+    box-shadow: 0 0 0 2px black;
+}
+
+@media (min-width: 670px) {
+    .bar-background {
+        width: fit-content;
+        bottom: 3vh;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+@media (min-width: 990px) {
+
+}

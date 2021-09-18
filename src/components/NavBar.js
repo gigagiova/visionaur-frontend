@@ -19,7 +19,7 @@ const NavBar = props => {
                     <button className="navbar-button" style={{marginLeft: "auto"}} onClick={props.login}>Log in</button> :
                     (props.rightButton ? 
                         <button className="navbar-button" style={{marginLeft: "auto"}} onClick={props.rightButton.onClick}>{props.rightButton.text}</button> :
-                        <button className="navbar-button" style={{marginLeft: "auto"}} onClick={props.logout}>Log out</button>
+                        <button className="navbar-button" style={{visibility: "hidden"}}>hidden</button>
                     )    
                 }
                 
@@ -31,7 +31,6 @@ const NavBar = props => {
 const mapStateToProps = state => { return {user: state.user.user}}
 const mapDispatchToProps = dispatch => {
     return {
-        logout: () => dispatch(userActions.logout()),
         login: () => dispatch(popupActions.changePopup({content: 'Login'}))
     }
 }

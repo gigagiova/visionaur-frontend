@@ -60,7 +60,7 @@ const Register = () => {
     const handleSubmit = event => {
         event.preventDefault()
         axiosInstance.post('/users/register/', {
-            "email": email,
+            "email": email.toLocaleLowerCase(),
             "name": firstName,
             "username": username,
             "password": password

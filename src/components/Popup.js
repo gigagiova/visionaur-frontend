@@ -6,6 +6,8 @@ import Register from '../forms/Register'
 import Login from '../forms/Login'
 import AddSkill from '../popupContents.js/AddSkill'
 import DeleteSkill from '../popupContents.js/DeleteSkill'
+import DeleteProject from '../popupContents.js/DeleteProject'
+import SubmitProject from '../popupContents.js/SubmitProject'
 
 
 // don't really like it, but for now is ok
@@ -14,6 +16,8 @@ const contents = {
   Register: <Register/>,
   AddSkill: <AddSkill/>,
   DeleteSkill: <DeleteSkill/>,
+  DeleteProject: <DeleteProject/>,
+  SubmitProject: <SubmitProject/>,
   null: null
 }
 

@@ -1,14 +1,16 @@
 import NavBar from "../components/NavBar"
 import { useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 import '../styles/page.css'
 import axiosInstance from "../API/axios"
 import { urlRE } from "../forms/inputChecks"
 import ChooseSkills from "../components/ChooseSkills"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import { useEffect } from "react"
+import { popupActions } from "../store/redux"
 
 
-const EditProject = () => {
+const EditProject = ({isNew}) => {
     const [title, setTitle] = useState('')
     const [slug, setSlug] = useState('')
     const [description, setDescription] = useState('')
@@ -16,8 +18,25 @@ const EditProject = () => {
     const [selectedSkills, setSelectedSkills] = useState([])
     const [titleValid, setTitleValid] = useState(true)
     const [linkValid, setLinkValid] = useState(true)
+
+    const params = useParams()
     const history = useHistory()
+    const dispatch = useDispatch()
     const user = useSelector(state => state.user.user)
+
+    useEffect(() => {
+        if (!isNew) {
+            axiosInstance.get(`/projects/${params.slug}`)
+            .then(res => {
+                setTitle(res.data.title)
+                setSlug(res.data.slug)
+                setDescription(res.data.description)
+                setLink(res.data.repository)
+                setSelectedSkills(res.data.skills_needed.map(s => s.id))
+            })
+            .catch(err => console.log(err))
+        }
+    }, [])
 
     const onTitleChange = e => {
         const newTitle = e.target.value.replace(/^\s+|\s(?=\s)|[^a-zA-Z0-9\s]/, '')
@@ -39,27 +58,30 @@ const EditProject = () => {
 
     const submit = e => {
         e.preventDefault()
-        console.log(selectedSkills)
-        axiosInstance.post('/projects/', {
+        const data = {
             title: title,
             description: description,
             slug: slug,
             repository: link,
-            team: [
-                {
-                    role: "F",
-                    user: user.username,
-                }
-            ],
             skills_list: selectedSkills
-        })
-        .then(res => history.push("/project/" + res.data.slug))
-        .catch(err => console.log(err))
+        }
+        if (isNew) {
+            axiosInstance.post('/projects/', data)
+            .then(res => history.push("/project/" + res.data.slug))
+            .catch(err => console.log(err))
+        } else {
+            axiosInstance.put(`/projects/${params.slug}/`, data)
+            .then(res => history.push("/project/" + res.data.slug))
+            .catch(err => console.log(err))
+        }
     }
 
     return(
         <>
-            <NavBar title='New Project' leftButton={{text: "Cancel", onClick: () => history.push("/profile")}}/>
+            <NavBar title={isNew ? 'New Project' : params.slug}
+                leftButton={{text: "Cancel", onClick: () => history.push(`/project/${params.slug}/`)}} 
+                rightButton={{text: "Delete", onClick: () => dispatch(popupActions.changePopup({content: 'DeleteProject', data: {slug: params.slug}}))}}
+            />
             <div className="page">
                 <form>
                     <input className="underline-input" onChange={onTitleChange} value={title} style={ titleValid ? {} : {borderBottom: "2px solid lightcoral"}} placeholder="Title"/>
@@ -67,7 +89,7 @@ const EditProject = () => {
                     <textarea value={description} onChange={e => setDescription(e.target.value)} placeholder="Describe the project"/>
                     <input className="underline-input" onChange={onLinkChange} value={link} style={ linkValid ? {} : {borderBottom: "2px solid lightcoral"}} placeholder="repository link"/>
                     <ChooseSkills selected={selectedSkills} setSelected={setSelectedSkills}/>
-                    <button onClick={submit}>Create</button>
+                    <button onClick={submit}>{isNew ? "Create" : "Update"}</button>
                 </form>
             </div>
         </>

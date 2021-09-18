@@ -41,7 +41,7 @@ const Login = () => {
     const handleSubmit = event => {
         event.preventDefault()
         axiosInstance.post('/users/login/', {
-            "email": email,
+            "email": email.toLocaleLowerCase(),
             "password": password
         })
         .then(response => {

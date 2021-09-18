@@ -43,8 +43,12 @@ const User = () => {
                         <p className="bio">{user?.bio}</p>
                     </div>
                 </div> 
-                <SkillsList list={user?.skills}/>
-                <ProjectsList list={user?.projects}/>
+                <div className="left-column">
+                    <ProjectsList list={user?.projects}/>
+                </div>
+                <div className="right-column">
+                    <SkillsList list={user?.skills}/>
+                </div>
             </div>
         </>
     )

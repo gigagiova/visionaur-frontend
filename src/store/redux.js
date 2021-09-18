@@ -40,7 +40,6 @@ const userSlice = createSlice({
                 skills: action.payload.skills,
                 projects: action.payload.projects
             }
-            
             if (action.payload.access) localStorage.setItem('access_token', action.payload.access)
             if (action.payload.refresh) localStorage.setItem('refresh_token', action.payload.refresh)
         },

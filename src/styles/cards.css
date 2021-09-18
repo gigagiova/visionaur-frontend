@@ -2,6 +2,8 @@
 .card-profile-pic {
     width: 20%;
     border-radius: 100%;
+    padding: 2%;
+    box-sizing: border-box;
 }
 
 .proile-card-text {
@@ -45,7 +47,8 @@
     box-sizing: border-box;
     padding: 1.5em;
     border-radius: 1em;
-    box-shadow: 0 0 6px 0 gray;
+    box-shadow: 0 0 6px 0 lightgray;
+    margin: 1em 0;
 }
 
 .card-title {

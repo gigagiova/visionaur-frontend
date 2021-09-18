@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { connect } from 'react-redux'
+import { connect, useDispatch } from 'react-redux'
 import blank from '../assets/blank.png'
 import { mediaBaseURL } from '../API/utils'
 import '../styles/page.css'
@@ -9,21 +9,30 @@ import NavBar from '../components/NavBar'
 import { Redirect, useHistory } from 'react-router-dom'
 import SkillsList from '../components/SkillsList'
 import ProjectsList from '../components/ProjectsList'
-
+import axiosInstance from '../API/axios'
+import { userActions } from '../store/redux'
 
 const Profile = props => {
     
     const [image, setImage] = useState(blank)
+    const dispatch = useDispatch()
     const history = useHistory()
 
     useEffect(() => {
         if (props.user?.profile_pic) setImage(mediaBaseURL + props.user.profile_pic)
     }, [props.user])
 
+    useEffect(() => {
+        // update the user instance
+
+        axiosInstance.get('users/my-account/')
+        .then(res => dispatch(userActions.login(res.data)))
+    }, [])
+
     return (
         <>
             {!props.user && <Redirect to="/"/>}
-            <NavBar title={props.user?.username} leftButton={{text: "Edit", onClick: () => history.push("/edit-profile")}}/>
+            <NavBar title={props.user?.username} leftButton={{text: "Edit", onClick: () => history.push("/edit-profile")}} rightButton={{text: "Log Out", onClick: () => dispatch(userActions.logout())}}/>
             <div className="page">
                 <div className="profile-header">
                     <img alt='profile' className="profile-picture" src={image}/>
@@ -36,6 +45,7 @@ const Profile = props => {
                 <div className="left-column">
                     <button style={{margin: "3% auto", display: "block"}} onClick={() => history.push("/new-project")}>New project</button>
                     <ProjectsList list={props.user?.projects}/>
+                    <p className="link-text" style={{margin: "1em 0"}} onClick={() => history.push("/new-challenge")}>host a challenge</p>
                 </div>
                 <div className="right-column">
                     <SkillsList list={props.user?.skills}/>

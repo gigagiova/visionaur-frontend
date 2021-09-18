@@ -2,7 +2,9 @@
 
 const errorDict = {
     email_taken: "an account with this email already exists",
-    generic: "an error has occurred, try again"
+    incorrect_credentials: "incorrect login credentials",
+    account_not_found: "account not found",
+    generic: "an error has occurred, try again",
 }
 
 export default errorDict

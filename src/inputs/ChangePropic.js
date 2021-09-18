@@ -16,7 +16,6 @@ const ChangePropic = props => {
     const previewCanvasRef = useRef(null)
     const imgRef = useRef(null)
     const user = useSelector(state => state.user.user)
-
     const [defaultImage, setDefaultImage] = useState(blank)
 
     useEffect(() => {
@@ -24,6 +23,8 @@ const ChangePropic = props => {
             setDefaultImage(mediaBaseURL + user.profile_pic)
         }
     }, [user])
+
+    useEffect(() => setDefaultImage(props.default ? mediaBaseURL + props.default : blank), [props.default])
 
     useEffect(() => {
         if (!completedCrop || !previewCanvasRef.current || !imgRef.current) {
