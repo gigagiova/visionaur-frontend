@@ -5,12 +5,31 @@
     padding-bottom: 8vh;
     margin: 0 auto;
     box-sizing: border-box;
+    overflow: auto;
 }
+
+.page-tabs {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 0.5em;
+    gap: 3em;
+}
+
+.page-tabs > span {
+    cursor: pointer;
+    font-size: small;
+    padding-bottom: 0.5em;
+}
+
 
 @media (min-width: 670px) {
     .page {
         width: 80%;
-        padding: 2% 5% 6vh;
+        padding: 2% 5% 12vh;
+    }
+    .profile-tabs {
+        padding: 0 3em;
     }
 }
 

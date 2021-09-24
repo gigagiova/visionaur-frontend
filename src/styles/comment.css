@@ -1,0 +1,26 @@
+
+.comment-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1em;
+    cursor: pointer;
+}
+
+.comment-info > p {
+    text-align: left;
+    margin: 0;
+    font-size: x-small;
+}
+
+.comment-image {
+    width: 2em;
+    border-radius: 50%;
+}
+
+
+@media (min-width: 670px) {
+    .comment-info > p {
+        font-size: small;
+    }
+}

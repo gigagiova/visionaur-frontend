@@ -85,7 +85,7 @@ const EditProject = ({isNew}) => {
             <div className="page">
                 <form>
                     <input className="underline-input" onChange={onTitleChange} value={title} style={ titleValid ? {} : {borderBottom: "2px solid lightcoral"}} placeholder="Title"/>
-                    <p style={{margin: "0", minHeight: "1em"}}>{slug}</p>
+                    <p style={{margin: "0", minHeight: "1em", textAlign: "center"}}>{slug}</p>
                     <textarea value={description} onChange={e => setDescription(e.target.value)} placeholder="Describe the project"/>
                     <input className="underline-input" onChange={onLinkChange} value={link} style={ linkValid ? {} : {borderBottom: "2px solid lightcoral"}} placeholder="repository link"/>
                     <ChooseSkills selected={selectedSkills} setSelected={setSelectedSkills}/>

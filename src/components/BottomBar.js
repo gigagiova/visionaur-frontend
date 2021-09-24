@@ -5,7 +5,6 @@ import { connect } from "react-redux"
 import { mediaBaseURL } from "../API/utils"
 import "../styles/bottombar.css"
 import blank from '../assets/blank.png'
-import home from '../assets/home.svg'
 
 
 const BottomBar = (props) => {

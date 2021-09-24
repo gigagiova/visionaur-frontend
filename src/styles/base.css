@@ -5,11 +5,12 @@
 
 body {
     margin: 0;
+    background-color: #0d1117;
 }
 
-h1, h2, p, button, div {
+h1, h2, p, button, div, span {
     font-family: 'Montserrat', sans-serif;
-    color: rgba(0, 0, 0, 0.8);
+    color: white;
 }
 
 h1, h2 {
@@ -31,10 +32,16 @@ input {
     padding: 2% 5%;
     border-radius: 16px;
     background-color: rgba(255,255,255,0);
-    border: 2px solid rgba(0,0,0,0.2);
+    border: 2px solid rgba(255,255,255,0.2);
     color: black;
     box-sizing: border-box;
     width: 90%;
+    color: white;
+}
+
+textarea {
+    background-color: transparent;
+    color: white;
 }
 
 ul {
@@ -43,9 +50,13 @@ ul {
     padding-inline: 0;
 }
 
+li {
+    margin-left: 1em;
+}
+
 input:focus {
     outline: none;
-    border: 2px solid rgba(0,0,0,0.1);
+    border: 2px solid rgba(255,255,255,0.4);
 }
 
 .input-valid {
@@ -54,7 +65,7 @@ input:focus {
 
 button {
     display: inline-block;
-    padding: 3% 5%;
+    padding: 0.5em 2em;
     margin: 3% 0;
     text-decoration: none;
     border-radius: 16px;
@@ -117,6 +128,10 @@ textarea:focus {
 
 .input-file:hover {
     color: black;
+}
+
+.ck-content{
+    background-color: transparent !important;
 }
 
 @media (min-width: 990px) {

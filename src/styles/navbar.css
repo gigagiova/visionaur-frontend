@@ -17,10 +17,10 @@
 .navbar-button {
     margin: 0;
     height: fit-content;
-    padding: 6%;
-    background-color: white;
-    color: var(--theme-color);
-    font-size: small;
+    padding: 0.5em 6%;
+    color: white;
+    background-color: transparent;
+    font-size: x-small;
 }
 
 .navbar-button:hover {
@@ -48,7 +48,6 @@
     }
 
     .navbar-button {
-        padding: 4%;
         font-size: medium;
     }
 }

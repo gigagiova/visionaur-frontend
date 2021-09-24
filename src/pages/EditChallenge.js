@@ -108,7 +108,7 @@ const EditChallenge = ({isNew}) => {
                 <form>
                     <ChangePropic setBlob={setBlob} default={image}/>
                     <input className="underline-input" onChange={onTitleChange} value={title} style={ titleValid ? {} : {borderBottom: "2px solid lightcoral"}} placeholder="Title"/>
-                    <p style={{margin: "0", minHeight: "1em"}}>{slug}</p>
+                    <p style={{margin: "0", minHeight: "1em", textAlign: "center"}}>{slug}</p>
 
                     <div style={{width: "90%", margin:"2% auto"}}><CKEditor
                         editor={ ClassicEditor }
@@ -116,8 +116,10 @@ const EditChallenge = ({isNew}) => {
                         onChange={ ( event, editor ) => setDescription(editor.getData()) }
                         config={{placeholder: "describe your challenge..."}}
                     /></div>
-                    <p style={{margin: "0"}}>deadline:</p>
-                    <input className="underline-input" onChange={setDeadline} value={deadline} placeholder="deadline"/>
+                    <div style={{display: "flex", flexDirection: "row", alignContent: "center", justifyContent: "center", gap: "2em"}}>
+                        <p style={{margin: "0", padding: "1%"}}>deadline:</p>
+                        <input className="underline-input" onChange={setDeadline} value={deadline} placeholder="deadline" style={{margin: "0"}}/>
+                    </div>
                     <button onClick={submit}>{isNew ? "Create" : "Update"}</button>
                 </form>
             </div>

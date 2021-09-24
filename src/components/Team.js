@@ -42,7 +42,7 @@ const Team = ({team, editable, slug, root='/projects', title="Team"}) => {
                     <button style={{marginRight: "1em"}} onClick={addMember}>Add</button>
                     <span style={{cursor: "pointer"}} onClick={() => setAdd(p => !p)}>close</span>
                 </div>: 
-                <p style={{cursor: "pointer", margin: "0.5em"}} onClick={() => setAdd(p => !p)}>Add member</p>)}
+                <p style={{cursor: "pointer", margin: "0.5em", textAlign: "center"}} onClick={() => setAdd(p => !p)}>Add member</p>)}
         </div>
     )
 }

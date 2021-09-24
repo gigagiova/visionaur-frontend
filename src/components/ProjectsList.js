@@ -5,12 +5,12 @@ const ProjectsList = ({list}) => {
 
     const history = useHistory()
 
-    if (!list) return null
+    if (!list) return null 
 
     return (
         <div>
             {list.map(p => (
-                <div key={p.project} className="project-card" onClick={() => history.push("/project/" + p.project)}>
+                <div key={p.slug} className="project-card" onClick={() => history.push("/project/" + p.slug)}>
                     <p className="card-title">{p.title}</p>
                     <p style={{margin: "0", fontSize: "small"}}>{p.description}</p>
                 </div>

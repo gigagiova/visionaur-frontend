@@ -15,6 +15,7 @@ import Project from './pages/Project'
 import BottomBar from './components/BottomBar'
 import EditChallenge from './pages/EditChallenge'
 import Challenge from './pages/Challenge'
+import Explore from './pages/Explore'
 
 const App = () => {
   
@@ -32,20 +33,20 @@ const App = () => {
     <>
       <Switch>
         <Route path="/" exact><Landing/></Route>
-        <Route path="/profile" exact><Profile/></Route>
+        <Route path="/profile" exact><Profile/><BottomBar/></Route>
+        <Route path="/explore" exact><Explore/><BottomBar/></Route>
         <Route path="/edit-profile"><ProfileSetup/></Route>
         <Route path="/force-logout"><ForceLogout/></Route>
         <Route path="/new-project"><EditProject isNew={true}/></Route>
         <Route path="/edit-project/:slug"><EditProject/></Route>
-        <Route path="/user/:username"><User/></Route>
-        <Route path="/project/:slug"><Project/></Route>
+        <Route path="/user/:username"><User/><BottomBar/></Route>
+        <Route path="/project/:slug"><Project/><BottomBar/></Route>
         <Route path="/new-challenge"><EditChallenge isNew={true}/></Route>
         <Route path="/edit-challenge/:slug"><EditChallenge/></Route>
-        <Route path="/challenge/:slug"><Challenge/></Route>
+        <Route path="/challenge/:slug"><Challenge/><BottomBar/></Route>
       </Switch>
       
       <Popup close={() => dispatch(popupActions.changePopup({content: null}))}/>
-      <BottomBar/>
     </>
   );
 }

@@ -13,6 +13,8 @@ import { mediaBaseURL } from '../API/utils'
 import blank from '../assets/blank.png'
 import { popupActions } from '../store/redux'
 import ProjectsList from '../components/ProjectsList'
+import Discussion from '../components/Discussion'
+import Update from '../components/Update'
 
 
 const Challenge = () => {
@@ -20,6 +22,7 @@ const Challenge = () => {
     const [challenge, setChallenge] = useState(null)
     const [editable, setEditable] = useState(false)
     const [image, setImage] = useState(blank)
+    const [updateText, setUpdateText] = useState('')
     const [tab, setTab] = useState(0)
     const history = useHistory()
     const dispatch = useDispatch()
@@ -41,6 +44,14 @@ const Challenge = () => {
         .catch(err => console.log(err))
     }
 
+    const postUpdate = () => {
+        if (updateText.length === 0) return
+        
+        axiosInstance.post('challenges/post-update/', {text: updateText, slug: params.slug})
+        .then(res => { setUpdateText(''); setChallenge(prev => ({...prev, updates: [...prev.updates, res.data]}))})
+        .catch(err => console.log(err))
+    }
+
     return (
         <>
             <NavBar title={params.slug} rightButton={editable ? {text: "Edit", onClick: () => history.push(`/edit-challenge/${params.slug}`)} : null}/>
@@ -54,21 +65,33 @@ const Challenge = () => {
                     </div>
                 </div> 
                 <div className="profile-tabs">
-                    <span className={tab == 0 ? "tab-selected" : undefined} onClick={() => setTab(0)}>OVERVIEW</span>
-                    <span className={tab == 1 ? "tab-selected" : undefined} onClick={() => setTab(1)}>PARTICIPANTS</span>
-                    <span className={tab == 2 ? "tab-selected" : undefined} onClick={() => setTab(2)}>DISCUSSION</span>
+                    <span className={tab === 0 ? "tab-selected" : undefined} onClick={() => setTab(0)}>OVERVIEW</span>
+                    <span className={tab === 1 ? "tab-selected" : undefined} onClick={() => setTab(1)}>PARTICIPANTS</span>
+                    <span className={tab === 2 ? "tab-selected" : undefined} onClick={() => setTab(2)}>DISCUSSION</span>
                 </div>
                 <div className="left-column">
                     { tab === 0 && 
-                        <div className="bio">{parse(challenge?.description ? challenge?.description : '')}</div>
+                        <>
+                            <div className="bio">{parse(challenge?.description ? challenge?.description : '')}</div>
+                            { editable && 
+                                <>
+                                    <textarea value={updateText} onChange={ e => setUpdateText(e.target.value)} placeholder="write an update" style={{width: "-webkit-fill-available"}}/>
+                                    <button onClick={postUpdate} style={{display: "block", margin: "0 0 0 auto"}}>post</button>
+                                </>
+                            }
+                            {challenge?.updates && challenge.updates.map(u => <Update key={u.id} data={u}/>)}
+                        </>
                     }
                     { tab === 1 &&
                         <ProjectsList list={challenge?.subscribed_projects}/>
                     }
+                    { tab === 2 && 
+                        <Discussion discussion={challenge?.comments} parent={{slug: params.slug}} url='/challenges/post-comment/' slug={params.slug}/>
+                    }
                 </div>
                 <div className="right-column">
                     { tab == 0 && 
-                        <Team team={challenge?.organizers} editable={editable} slug={params.slug} root="/challenges"/>
+                        <Team team={challenge?.organizers} editable={editable} root="/challenges"/>
                     }
                     { tab == 1 &&
                         <div>
