@@ -91,7 +91,7 @@ const Challenge = () => {
                 </div>
                 <div className="right-column">
                     { tab == 0 && 
-                        <Team team={challenge?.organizers} editable={editable} root="/challenges"/>
+                        <Team team={challenge?.organizers} editable={editable} verb="TC"/>
                     }
                     { tab == 1 &&
                         <div>

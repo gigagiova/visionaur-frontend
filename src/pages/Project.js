@@ -16,6 +16,7 @@ const Project = () => {
     const params = useParams()
     const [project, setProject] = useState(null)
     const [editable, setEditable] = useState(false)
+    const [admin, setAdmin] = useState(false)
     const [updateText, setUpdateText] = useState(null)
     const history = useHistory()
     const username = useSelector(state => state.user.user?.username)
@@ -24,7 +25,8 @@ const Project = () => {
         axiosInstance.get(`projects/${params.slug}`)
         .then(res => {
             setProject(res.data)
-            if (res.data.team.some(m => m.username === username && m.role !== "M")) setEditable(true)
+            if (res.data.team.some(m => m.username === username)) setEditable(true)
+            if (res.data.team.some(m => m.username === username && m.role !== "M")) setAdmin(true)
         })
         .catch(err => console.log(err))
     }, [params.slug, username])
@@ -39,7 +41,7 @@ const Project = () => {
 
     return (
         <>
-            <NavBar title={params.slug} rightButton={editable ? {text: "Edit", onClick: () => history.push(`/edit-project/${params.slug}`)} : null}/>
+            <NavBar title={params.slug} rightButton={admin ? {text: "Edit", onClick: () => history.push(`/edit-project/${params.slug}`)} : null}/>
             <div className="page"  style={{textAlign: "center"}}>
                 <div className="left-column">
                     <span className="name">{project?.title}</span>
@@ -61,7 +63,7 @@ const Project = () => {
                 <div className="right-column">
                     <button onClick={() => window.open("//" + project?.repository)}>repository</button>
                     <Tags list={project?.skills_needed}/>
-                    <Team team={project?.team} editable={editable} slug={params.slug}/>
+                    <Team team={project?.team} editable={admin} slug={params.slug} verb="IP"/>
                 </div>
             </div>
         </>

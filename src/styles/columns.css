@@ -8,9 +8,22 @@
         box-sizing: border-box;
     }
 
+    .center-column {
+        width: 70%;
+        margin: 0 auto;
+    }
+
     .right-column {
         width: 30%;
         position: relative;
         float: right;
+    }
+}
+
+
+@media (min-width: 990px) {
+    .center-column {
+        width: 50%;
+        max-width: 670px;
     }
 }
